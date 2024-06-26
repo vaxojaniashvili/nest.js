@@ -10,8 +10,8 @@ export class UsersService {
   getUsers() {
     return this.data;
   }
-  getUserById(id: string) {
-    const user = this.data.find((u) => u.id === parseInt(id));
+  getUserById(id: number) {
+    const user = this.data.find((u) => u.id === id);
     if (!user) {
       throw new HttpException('User not found', HttpStatus.NOT_FOUND);
     } else {
@@ -40,8 +40,8 @@ export class UsersService {
     }
     return this.data;
   }
-  deleteUser(id: string) {
-    const deletedUser = this.data.filter((user) => user.id !== parseInt(id));
-    return deletedUser
+  deleteUser(id: number) {
+    const deletedUser = this.data.filter((user) => user.id !== id);
+    return deletedUser;
   }
 }
