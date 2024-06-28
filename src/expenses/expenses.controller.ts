@@ -7,6 +7,7 @@ import {
   Param,
   ParseIntPipe,
   Post,
+  Put,
 } from '@nestjs/common';
 import { ExpensesService } from './expenses.service';
 import { CreateExpensesDto } from './dtos/CreateExpenses.dto';
@@ -38,6 +39,15 @@ export class ExpensesController {
     const postExpenses = this.expensesService.postExpenses(body);
     if (postExpenses) {
       return postExpenses;
+    } else {
+      throw new HttpException('Ups bad request!', HttpStatus.BAD_REQUEST);
+    }
+  }
+  @Put('/update')
+  putUsers(@Body() body: CreateExpensesDto) {
+    const updatedUser = this.expensesService.putUsers(body);
+    if (updatedUser) {
+      return updatedUser;
     } else {
       throw new HttpException('Ups bad request!', HttpStatus.BAD_REQUEST);
     }

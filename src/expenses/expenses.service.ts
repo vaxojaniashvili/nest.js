@@ -32,4 +32,18 @@ export class ExpensesService {
     this.data.push(newUser);
     return newUser;
   }
+  putUsers(body: CreateExpensesDto) {
+    const { title, price, description, id } = body;
+    const timeToUpdate = new Date().toLocaleString();
+    const updatedUser = {
+      id,
+      title,
+      price,
+      description,
+      timeToUpdate,
+    };
+    const findUser = this.data.findIndex((u) => u.id === id);
+    this.data[findUser] = { ...updatedUser };
+    return updatedUser;
+  }
 }
