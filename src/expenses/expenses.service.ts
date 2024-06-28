@@ -43,7 +43,20 @@ export class ExpensesService {
       timeToUpdate,
     };
     const findUser = this.data.findIndex((u) => u.id === id);
-    this.data[findUser] = { ...updatedUser };
-    return updatedUser;
+    if (findUser <= 0) {
+      throw new HttpException('User not found', HttpStatus.BAD_REQUEST);
+    } else {
+      this.data[findUser] = { ...updatedUser };
+      return updatedUser;
+    }
+  }
+  deleteUser(id: CreateExpensesDto) {
+    const findIndexUser = this.data.findIndex((u) => u.id === id);
+    if (findIndexUser <= 0) {
+      throw new HttpException('User not found', HttpStatus.BAD_REQUEST);
+    } else {
+      this.data.splice(findIndexUser, 1);
+      return { message: 'User deleted' };
+    }
   }
 }

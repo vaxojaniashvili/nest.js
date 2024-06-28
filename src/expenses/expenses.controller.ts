@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   HttpException,
   HttpStatus,
@@ -48,6 +49,15 @@ export class ExpensesController {
     const updatedUser = this.expensesService.putUsers(body);
     if (updatedUser) {
       return updatedUser;
+    } else {
+      throw new HttpException('Ups bad request!', HttpStatus.BAD_REQUEST);
+    }
+  }
+  @Delete('/delete/:id')
+  deleteUser(@Param('id', ParseIntPipe) id: CreateExpensesDto) {
+    const deleteUser = this.expensesService.deleteUser(id);
+    if (deleteUser) {
+      return deleteUser;
     } else {
       throw new HttpException('Ups bad request!', HttpStatus.BAD_REQUEST);
     }
