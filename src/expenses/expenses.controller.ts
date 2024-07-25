@@ -12,6 +12,7 @@ import {
 } from '@nestjs/common';
 import { ExpensesService } from './expenses.service';
 import { CreateExpensesDto } from './dtos/CreateExpenses.dto';
+import { UserNotFoundException } from 'src/exceptions/UserNotFound.exception';
 
 @Controller('expenses')
 export class ExpensesController {
@@ -32,7 +33,7 @@ export class ExpensesController {
     if (expensesById) {
       return expensesById;
     } else {
-      throw new HttpException('Ups bad request!', HttpStatus.BAD_REQUEST);
+      throw new UserNotFoundException('User not found', 404);
     }
   }
   @Post('/add')
